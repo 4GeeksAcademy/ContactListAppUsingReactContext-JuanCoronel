@@ -17,14 +17,14 @@ const getState = ({ getStore, setStore }) => {
 				}
 			},
 
-			agregarContacto: async function(nombre, email, telefono, direccion) {
+			agregarContacto: async function(nombre, direccion, telefono, email) {
 				try {
 					let contacto = {
 						full_name: nombre,
-						email: email,
-						agenda_slug: "juanocoronel",
 						address: direccion,
-						phone: telefono
+						phone: telefono,
+						email: email,
+						agenda_slug: "juanocoronel"
 					};
 
 					let response = await fetch("https://playground.4geeks.com/apis/fake/contact/", {

@@ -10,8 +10,8 @@ export const AddContact = () => {
 	const [telefono, setTelefono] = useState("");
 
 	const agregarContacto = () => {
-		actions.agregarContacto(nombre, email, direccion, telefono);
-		console.log("Guardando contacto:", nombre, email, direccion, telefono);
+		actions.agregarContacto(nombre, direccion, telefono, email);
+		console.log("Guardando contacto:", nombre, direccion, telefono, email);
 	};
 
 	return (
