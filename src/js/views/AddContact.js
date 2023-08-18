@@ -20,7 +20,7 @@ export const AddContact = () => {
 				<h1 className="text-center mt-5">Add a new contact</h1>
 				<form>
 					<div className="form-group">
-						<label>Full_Name</label>
+						<label>Full Name</label>
 						<input
 							type="text"
 							className="form-control"

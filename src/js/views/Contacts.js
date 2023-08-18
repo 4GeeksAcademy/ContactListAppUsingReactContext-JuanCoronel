@@ -28,8 +28,8 @@ export const Contacts = () => {
 					<ul className="list-group pull-down" id="contact-list">
 						{store.contacts.map((item, contact, index) => (
 							<ContactCard
-								full_namename={item.full_name}
-								adress={item.address}
+								full_name={item.full_name}
+								address={item.address}
 								phone={item.phone}
 								email={item.email}
 								key={item.id}
