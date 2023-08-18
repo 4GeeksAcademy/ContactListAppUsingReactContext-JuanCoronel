@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
+import { Context } from "../store/appContext.js";
 
 export const Contacts = () => {
 	const [state, setState] = useState({
-		showModal: false
+		showModal: false,
+		id: undefined
 	});
+
+	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.obtenerInfo();
+	}, []);
 
 	return (
 		<div className="container">
@@ -19,14 +26,20 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						<ContactCard onDelete={() => setState({ showModal: true })} />
-						<ContactCard />
-						<ContactCard />
-						<ContactCard />
+						{store.contacts.map((item, contact, index) => (
+							<ContactCard
+								full_namename={item.name}
+								phone={item.phone}
+								adress={item.address}
+								email={item.email}
+								key={item.id}
+								onDelete={() => setState({ showModal: true, id: item.id })}
+							/>
+						))}
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal id={state.id} show={state.showModal} onClose={() => setState({ showModal: false })} />
 		</div>
 	);
 };

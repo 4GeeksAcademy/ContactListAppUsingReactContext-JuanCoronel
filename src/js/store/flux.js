@@ -1,11 +1,60 @@
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
-			//Your data structures, A.K.A Entities
+			contacts: [],
+			user: null
 		},
 		actions: {
-			//(Arrow) Functions that update the Store
-			// Remember to use the scope: scope.state.store & scope.setState()
+			obtenerInfo: async function() {
+				try {
+					let response = await fetch("https://playground.4geeks.com/apis/fake/contact/agenda/juanocoronel");
+					let data = await response.json();
+					// console.log(data);
+
+					setStore({ contacts: data });
+				} catch (error) {
+					console.log(error);
+				}
+			},
+
+			agregarContacto: async function(nombre, email, telefono, direccion) {
+				try {
+					let contacto = {
+						full_name: nombre,
+						email: email,
+						agenda_slug: "juanocoronel",
+						address: direccion,
+						phone: telefono
+					};
+
+					let response = await fetch("https://playground.4geeks.com/apis/fake/contact/", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(contacto)
+					});
+
+					let data = await response.json();
+					console.log(data);
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			eliminarContacto: async function(id) {
+				try {
+					let response = await fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+					let data = await response.json();
+					this.obtenerInfo();
+				} catch (error) {
+					console.log(error);
+				}
+			}
 		}
 	};
 };
